@@ -32,11 +32,9 @@ def unique_kmers(x: str, k: int) -> list[str]:
     >>> unique_kmers('gatcgatcgatc', 4)
     ['atcg', 'cgat', 'gatc', 'tcga']
     """
-    kmers = set()
+
     if k > 0 and len(x) > 0:
-        for i in range(len(x)- k + 1):
-            if x[i:i+k] not in kmers:
-                kmers.add(x[i:i+k])
+        kmers = {x[i:i+k] for i in range(len(x) - k + 1)}
     else:
         return []
     return sorted(list(kmers))
