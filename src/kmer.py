@@ -14,7 +14,7 @@ def kmer(x: str, k: int) -> list[str]:
     >>> kmer('agtagctagt', 0)
     []
     """
-    if k > 0:
+    if k > 0 and len(x) > 0:
         kmers = [x[i:i + k] for i in range(len(x)-k+1)]
     else:
         return []
@@ -27,19 +27,19 @@ def unique_kmers(x: str, k: int) -> list[str]:
     Computer all unique k-mers of x.
 
     >>> unique_kmers('agtagtcg', 3)
-    ['agt', 'gta', 'tag', 'gtc', 'tcg']
+    ['agt', 'gta', 'gtc', 'tag', 'tcg']
 
     >>> unique_kmers('gatcgatcgatc', 4)
-    ['gatc', 'atcg', 'tcga', 'cgat']
+    ['atcg', 'cgat', 'gatc', 'tcga']
     """
-    kmers = []
-    if k > 0:
+    kmers = set()
+    if k > 0 and len(x) > 0:
         for i in range(len(x)- k + 1):
             if x[i:i+k] not in kmers:
-                kmers.append(x[i:i+k])
+                kmers.add(x[i:i+k])
     else:
         return []
-    return kmers
+    return sorted(list(kmers))
 
 
 def count_kmers(x: str, k: int) -> dict[str, int]:
@@ -51,9 +51,12 @@ def count_kmers(x: str, k: int) -> dict[str, int]:
     """
     kmer_count = {}
 
-    for i in range(len(x) - k + 1):
-        if x[i:i + k] not in kmer_count:
-            kmer_count[x[i:i + k]] = 1
-        else:
-            kmer_count[x[i:i + k]] += 1
-    return kmer_count
+    if k > 0 and len(x) > 0:
+        for i in range(len(x) - k + 1):
+            if x[i:i + k] not in kmer_count:
+                kmer_count[x[i:i + k]] = 1
+            else:
+                kmer_count[x[i:i + k]] += 1
+        return kmer_count
+    else:
+        return {}

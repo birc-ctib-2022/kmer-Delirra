@@ -17,9 +17,9 @@ def test_kmer():
     assert kmer('ctgaatcg', 0) == []
 
 def test_unique_kmers():
-    assert unique_kmers('atcg', 1) == ['a', 't', 'c', 'g']
+    assert unique_kmers('atcg', 1) == ['a', 'c', 'g', 't']
     assert unique_kmers('aaaaaaaaaaaa', 4) == ['aaaa']
-    assert unique_kmers('gtaccgta', 3) == ['gta', 'tac', 'acc', 'ccg', 'cgt']
+    assert unique_kmers('gtaccgta', 3) == ['acc', 'ccg', 'cgt', 'gta', 'tac']
     assert unique_kmers('', 3) == []
     assert unique_kmers('ctgaatcg', 0) == []
 
